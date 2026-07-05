@@ -1,3 +1,5 @@
+students = []
+
 def display_menu():
     print("====Student Grade Manager====")
     print("Menu:")
@@ -7,8 +9,35 @@ def display_menu():
     print("4. Delete Student")
     print("5. Exit ")
 
-def add():
-    print("Not implemented")
+def get_student_details():
+    name = (input("Enter student name:")).title()
+    usn = (input("Enter student usn:")).upper()
+    while True:
+        try:
+            marks = float(input("Enter student marks:") )
+            if 0<=marks<=100:
+                break
+            else:
+                print("Invalid input: Enter a number from 0 to 100.\n")
+        
+        except ValueError:
+            print("Invalid input: Enter a valid number.\n")
+
+    student = {
+        "name": name,
+        "usn": usn,
+        "marks": marks
+    }
+    return student
+
+def add(student):
+    for existing_student in students:
+        if student["usn"] == existing_student["usn"]:
+            print(f"Student with usn {existing_student["usn"]} already exists.")
+            print("Student was not added.\n")
+            return
+    students.append(student)
+    print("Student added successfully!\n")
 
 def view():
     print("Not implemented")
@@ -25,13 +54,15 @@ def main():
 
         try:
             choice = int(input("Enter your choice:"))
-            
+
         except ValueError:
-            print("Pls enter only integer values.")
+            print("Invalid input: Enter only integer values.\n")
             continue
 
         if choice == 1:
-            add()
+            student = get_student_details()
+            add(student)
+            
         elif choice == 2:
             view()
         elif choice == 3:
@@ -42,7 +73,7 @@ def main():
             print("Bye")
             break
         else:
-            print("Invalid choice: Pls enter integer numbers from 1 to 5.")
+            print("Invalid choice: Enter integer numbers from 1 to 5.\n")
 
 if __name__ == "__main__":
     main()
