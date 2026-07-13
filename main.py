@@ -1,12 +1,24 @@
 import json
 
+students = []
+
+
+
 def load_students():
-    pass
+    try:
+        with open("students.json", "r") as file:
+            return json.load(file)
+
+    except FileNotFoundError:
+        return []
+
+
 
 def save_students():
-    pass
+    with open("students.json", "w") as file:
+        json.dump(students, file, indent = 4)
 
-students = []
+
 
 def display_menu():
     print("====Student Grade Manager====")
@@ -57,6 +69,7 @@ def add(student):
             print("Student was not added.\n")
             return
     students.append(student)
+    save_students()
     print("Student added successfully!\n")
 
 
@@ -69,7 +82,6 @@ def view():
     for index,existing_student in enumerate(students, start=1):
         print(f"Student {index}:")
         show_student_details(existing_student)
-        print("------------------------------\n")
 
 
 
@@ -87,6 +99,7 @@ def delete(usn):
     for existing_student in students:
         if usn == existing_student['usn']:
             students.remove(existing_student)
+            save_students()
             print("Student successfully deleted!\n")
             return
     print(f"No student with USN: {usn} was found.")
@@ -94,6 +107,10 @@ def delete(usn):
 
 
 def main():
+
+    global students
+    students = load_students()
+
     while True:
         display_menu()
 
