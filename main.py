@@ -38,7 +38,7 @@ def show_student_details(existing_student):
     print(f"Name: {existing_student['name']}")
     print(f"USN: {existing_student['usn']}")
     print(f"Marks: {existing_student['marks']}")
-    print()
+    print("------------------------------\n")
 
 
 
@@ -75,8 +75,13 @@ def search(usn):
 
 
 
-def delete():
-    print("Not implemented")
+def delete(usn):
+    for existing_student in students:
+        if usn == existing_student['usn']:
+            students.remove(existing_student)
+            print("Student successfully deleted!\n")
+            return
+    print(f"No student with USN: {usn} was found.")
 
 
 
@@ -104,7 +109,8 @@ def main():
             search(usn)
 
         elif choice == 4:
-            delete()
+            usn = input("Enter the USN of student to be deleted: ").upper()
+            delete(usn)
 
         elif choice == 5:
             print("Bye")
