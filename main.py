@@ -1,3 +1,11 @@
+import json
+
+def load_students():
+    pass
+
+def save_students():
+    pass
+
 students = []
 
 def display_menu():
