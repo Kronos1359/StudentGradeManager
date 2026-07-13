@@ -9,6 +9,8 @@ def display_menu():
     print("4. Delete Student")
     print("5. Exit ")
 
+
+
 def get_student_details():
     name = (input("Enter student name: ")).title()
     usn = (input("Enter student usn: ")).upper()
@@ -30,32 +32,53 @@ def get_student_details():
     }
     return student
 
+
+
+def show_student_details(existing_student):
+    print(f"Name: {existing_student['name']}")
+    print(f"USN: {existing_student['usn']}")
+    print(f"Marks: {existing_student['marks']}")
+    print()
+
+
+
 def add(student):
     for existing_student in students:
         if student["usn"] == existing_student["usn"]:
-            print(f"Student with usn {existing_student["usn"]} already exists.")
+            print(f"Student with usn {existing_student['usn']} already exists.")
             print("Student was not added.\n")
             return
     students.append(student)
     print("Student added successfully!\n")
 
+
+
 def view():
     if len(students) == 0:
             print("No students exist.\n")
             return
-    else:
-        for index,existing_student in enumerate(students, start=1):
-            print(f"Student {index}:")
-            print(f"Name: {existing_student['name']}")
-            print(f"USN: {existing_student['usn']}")
-            print(f"Marks: {existing_student['marks']}")
-            print("------------------------------\n")
+    
+    for index,existing_student in enumerate(students, start=1):
+        print(f"Student {index}:")
+        show_student_details(existing_student)
+        print("------------------------------\n")
 
-def search():
-    print("Not implemented")
+
+
+def search(usn):
+    for existing_student in students:
+        if usn == existing_student["usn"]:
+            print("Student found: \n")
+            show_student_details(existing_student)
+            return
+    print(f"No student with USN: {usn} was found.")
+
+
 
 def delete():
     print("Not implemented")
+
+
 
 def main():
     while True:
@@ -77,14 +100,20 @@ def main():
             view()
 
         elif choice == 3:
-            search()
+            usn = input("Enter the USN to search: ").upper()
+            search(usn)
+
         elif choice == 4:
             delete()
+
         elif choice == 5:
             print("Bye")
             break
+
         else:
             print("Invalid choice: Enter integer numbers from 1 to 5.\n")
+
+
 
 if __name__ == "__main__":
     main()
