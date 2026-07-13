@@ -1,4 +1,4 @@
-#Student Grade Manager
+## Student Grade Manager
 
 A simple command-line application written in Python for managing Student Records
 
@@ -12,6 +12,7 @@ Built to learn Git and improve Python skills
 - Delete Student
 - Duplicate USN validation
 - Marks validation
+- Persistant JSON data storage
 
 ## Concepts Used
 
@@ -19,5 +20,7 @@ Built to learn Git and improve Python skills
 - Lists
 - Dictionaries
 - Loops
-- Exception Handling
+- Exception handling
+- JSON file handling
+- Basic file management
 - Git & GitHub
