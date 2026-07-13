@@ -10,11 +10,11 @@ def display_menu():
     print("5. Exit ")
 
 def get_student_details():
-    name = (input("Enter student name:")).title()
-    usn = (input("Enter student usn:")).upper()
+    name = (input("Enter student name: ")).title()
+    usn = (input("Enter student usn: ")).upper()
     while True:
         try:
-            marks = float(input("Enter student marks:") )
+            marks = float(input("Enter student marks: ") )
             if 0<=marks<=100:
                 break
             else:
@@ -40,7 +40,16 @@ def add(student):
     print("Student added successfully!\n")
 
 def view():
-    print("Not implemented")
+    if len(students) == 0:
+            print("No students exist.\n")
+            return
+    else:
+        for index,existing_student in enumerate(students, start=1):
+            print(f"Student {index}:")
+            print(f"Name: {existing_student['name']}")
+            print(f"USN: {existing_student['usn']}")
+            print(f"Marks: {existing_student['marks']}")
+            print("------------------------------\n")
 
 def search():
     print("Not implemented")
@@ -53,10 +62,11 @@ def main():
         display_menu()
 
         try:
-            choice = int(input("Enter your choice:"))
+            choice = int(input("Enter your choice: "))
+            print()
 
         except ValueError:
-            print("Invalid input: Enter only integer values.\n")
+            print("Invalid input: Enter only integers.\n")
             continue
 
         if choice == 1:
@@ -65,6 +75,7 @@ def main():
             
         elif choice == 2:
             view()
+
         elif choice == 3:
             search()
         elif choice == 4:
