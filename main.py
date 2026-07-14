@@ -27,16 +27,15 @@ def display_menu():
     print("2. View Students")
     print("3. Search Student")
     print("4. Delete Student")
-    print("5. Exit ")
+    print("5. Update Student Marks")
+    print("6. Exit ")
 
 
 
-def get_student_details():
-    name = (input("Enter student name: ")).title()
-    usn = (input("Enter student usn: ")).upper()
+def get_marks():
     while True:
         try:
-            marks = float(input("Enter student marks: ") )
+            marks = float(input("Enter new student marks: ") )
             if 0<=marks<=100:
                 break
             else:
@@ -44,6 +43,14 @@ def get_student_details():
         
         except ValueError:
             print("Invalid input: Enter a valid number.\n")
+    return marks
+
+
+
+def get_student_details():
+    name = (input("Enter new student name: ")).title()
+    usn = (input("Enter new student usn: ")).upper()
+    marks = get_marks()
 
     student = {
         "name": name,
@@ -114,6 +121,16 @@ def delete(usn):
 
 
 
+def update_marks(usn):
+    existing_student = find_student_by_usn(usn)
+    if existing_student:
+        existing_student['marks'] = get_marks()
+        save_students()
+        print("Student marks updated successfully!\n")
+    else:
+        print(f"No student with USN: {usn} was found.\n")
+
+
 def main():
 
     global students
@@ -146,11 +163,15 @@ def main():
             delete(usn)
 
         elif choice == 5:
+            usn = input("Enter the USN of student to update marks: ").upper()
+            update_marks(usn)
+
+        elif choice == 6:
             print("Bye")
             break
 
         else:
-            print("Invalid choice: Enter integer numbers from 1 to 5.\n")
+            print("Invalid choice: Enter integer numbers from 1 to 6.\n")
 
 
 

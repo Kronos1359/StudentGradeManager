@@ -13,6 +13,7 @@ Built to learn Git and improve Python skills
 - Duplicate USN validation
 - Marks validation
 - Persistant JSON data storage
+- Update Student Marks
 
 ## Concepts Used
 
