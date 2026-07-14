@@ -85,24 +85,32 @@ def view():
 
 
 
-def search(usn):
+def find_student_by_usn(usn):
     for existing_student in students:
         if usn == existing_student["usn"]:
-            print("Student found: \n")
-            show_student_details(existing_student)
-            return
-    print(f"No student with USN: {usn} was found.")
+            return existing_student
+    return None
+
+
+
+def search(usn):
+    existing_student = find_student_by_usn(usn)
+    if existing_student is None:
+        print(f"No student with USN: {usn} was found.")
+        return
+    print("Student found: \n")
+    show_student_details(existing_student)
 
 
 
 def delete(usn):
-    for existing_student in students:
-        if usn == existing_student['usn']:
-            students.remove(existing_student)
-            save_students()
-            print("Student successfully deleted!\n")
-            return
-    print(f"No student with USN: {usn} was found.")
+    existing_student = find_student_by_usn(usn)
+    if existing_student is None:
+        print(f"No student with USN: {usn} was found.")
+        return
+    students.remove(existing_student)
+    save_students() 
+    print("Student successfully deleted!\n")
 
 
 
