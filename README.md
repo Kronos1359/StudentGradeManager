@@ -15,10 +15,11 @@ Built to learn Git and improve Python skills
 - Persistant JSON data storage
 - Update Student Marks
 - Students' Statistics Data
+- Sort Students on Criteria
 
 ## Concepts Used
 
-- Functions
+- Helper Functions
 - Lists
 - Dictionaries
 - Loops
@@ -26,4 +27,5 @@ Built to learn Git and improve Python skills
 - JSON file handling
 - Basic file management
 - Aggregate functions
+- Lambda functions
 - Git & GitHub

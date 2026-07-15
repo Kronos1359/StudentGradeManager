@@ -66,10 +66,11 @@ def add(student):
     students.append(student)
     save_students()
     print("Student added successfully!\n")
+    input("Press Enter to continue...")
 
 
 
-def view():
+def view(students):
     if len(students) == 0:
             print("No students exist.\n")
             return
@@ -77,6 +78,7 @@ def view():
     for index,existing_student in enumerate(students, start=1):
         print(f"Student {index}:")
         show_student_details(existing_student)
+    input("Press Enter to continue...")
 
 
 
@@ -95,6 +97,7 @@ def search(usn):
         return
     print("Student found: \n")
     show_student_details(existing_student)
+    input("Press Enter to continue...")
 
 
 
@@ -106,6 +109,7 @@ def delete(usn):
     students.remove(existing_student)
     save_students() 
     print("Student successfully deleted!\n")
+    input("Press Enter to continue...")
 
 
 
@@ -117,6 +121,7 @@ def update_marks(usn):
         print("Student marks updated successfully!\n")
     else:
         print(f"No student with USN: {usn} was found.\n")
+    input("Press Enter to continue...")
 
 
 
@@ -146,6 +151,39 @@ def statistics():
     print(f"Average Marks: {average:.2f}")
     print(f"Highest Marks: {highest}")
     print(f"Lowest Marks: {lowest}\n")
+    input("Press Enter to continue...")
+
+
+
+def sort_menu():
+    print("====Sort Students====\n")
+    print("1. Sort by Name")
+    print("2. Sort by USN")
+    print("3. Sort by Marks (Ascending)")
+    print("4. Sort by Marks (Descending)")
+
+    try:
+        sort_choice = int(input("Enter your choice: "))
+    except ValueError:
+        print("Invalid Input: Enter a number.")
+        return
+    if sort_choice == 1:
+        sort_students("name")
+    elif sort_choice == 2:
+        sort_students("usn")
+    elif sort_choice == 3:
+        sort_students("marks")
+    elif sort_choice == 4:
+        sort_students("marks", reverse=True)
+    else:
+        print("Invalid Input: Enter a number from 1 to 4.")
+
+
+
+def sort_students(criteria, reverse = False):
+    sorted_students = sorted(students, key=lambda student: student[criteria], reverse=reverse)
+    view(sorted_students)
+    input("Press Enter to continue...")
 
 
 
@@ -158,7 +196,8 @@ def display_menu():
     print("4. Delete Student")
     print("5. Update Student Marks")
     print("6. Show Statistics")
-    print("7. Exit ")
+    print("7. Sort Students")
+    print("8. Exit ")
 
 
 
@@ -183,7 +222,7 @@ def main():
             add(student)
             
         elif choice == 2:
-            view()
+            view(students)
 
         elif choice == 3:
             usn = input("Enter the USN to search: ").upper()
@@ -201,6 +240,9 @@ def main():
             statistics()
 
         elif choice == 7:
+            sort_menu()
+
+        elif choice == 8:
             print("Bye")
             break
 
