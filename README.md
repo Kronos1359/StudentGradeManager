@@ -14,6 +14,7 @@ Built to learn Git and improve Python skills
 - Marks validation
 - Persistant JSON data storage
 - Update Student Marks
+- Students' Statistics Data
 
 ## Concepts Used
 
@@ -24,4 +25,5 @@ Built to learn Git and improve Python skills
 - Exception handling
 - JSON file handling
 - Basic file management
+- Aggregate functions
 - Git & GitHub

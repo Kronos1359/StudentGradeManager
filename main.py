@@ -20,18 +20,6 @@ def save_students():
 
 
 
-def display_menu():
-    print("====Student Grade Manager====")
-    print("Menu:")
-    print("1. Add Student")
-    print("2. View Students")
-    print("3. Search Student")
-    print("4. Delete Student")
-    print("5. Update Student Marks")
-    print("6. Exit ")
-
-
-
 def get_marks():
     while True:
         try:
@@ -131,6 +119,49 @@ def update_marks(usn):
         print(f"No student with USN: {usn} was found.\n")
 
 
+
+def statistics():
+    total = len(students)
+
+    if total == 0:
+        print("No students exist.\n")
+        return
+    
+    sum_marks = 0
+    highest = students[0]["marks"]
+    lowest = students[0]["marks"]
+
+    for existing_student in students:
+        sum_marks += existing_student["marks"]
+
+        if highest < existing_student["marks"]:
+            highest = existing_student["marks"]
+
+        if lowest > existing_student["marks"]:
+            lowest = existing_student["marks"]
+    average = sum_marks/total
+
+    print("====Statistics====")
+    print(f"Total Students: {total}")
+    print(f"Average Marks: {average:.2f}")
+    print(f"Highest Marks: {highest}")
+    print(f"Lowest Marks: {lowest}\n")
+
+
+
+def display_menu():
+    print("====Student Grade Manager====")
+    print("Menu:")
+    print("1. Add Student")
+    print("2. View Students")
+    print("3. Search Student")
+    print("4. Delete Student")
+    print("5. Update Student Marks")
+    print("6. Show Statistics")
+    print("7. Exit ")
+
+
+
 def main():
 
     global students
@@ -167,6 +198,9 @@ def main():
             update_marks(usn)
 
         elif choice == 6:
+            statistics()
+
+        elif choice == 7:
             print("Bye")
             break
 
