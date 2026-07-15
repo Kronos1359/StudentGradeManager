@@ -8,7 +8,7 @@ Built to learn Git and improve Python skills
 
 - Add Student
 - View Students
-- Search Student by USN
+- Search Student by Name and USN
 - Delete Student
 - Duplicate USN validation
 - Marks validation

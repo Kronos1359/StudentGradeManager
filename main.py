@@ -90,7 +90,36 @@ def find_student_by_usn(usn):
 
 
 
-def search(usn):
+def find_students_by_name(name):
+    students_found = []
+    for existing_student in students:
+        if name == existing_student["name"]:
+            students_found.append(existing_student)
+    return students_found
+
+
+
+def search_menu():
+    print("====Search Student====\n")
+    print("1. Search by USN")
+    print("2. Search by Name")
+    try:
+        search_choice = int(input("Enter your choice: "))
+    except ValueError:
+        print("Invalid input: Enter either 1 or 2.")
+        return
+    if search_choice == 1:
+        usn = input("Enter the USN to search: ").upper()
+        search_by_usn(usn)
+    elif search_choice == 2:
+        name = input("Enter the Name to search: ").title()
+        search_by_name(name)
+    else:
+        print("Invalid input: Enter either 1 or 2.")
+
+
+
+def search_by_usn(usn):
     existing_student = find_student_by_usn(usn)
     if existing_student is None:
         print(f"No student with USN: {usn} was found.")
@@ -98,6 +127,16 @@ def search(usn):
     print("Student found: \n")
     show_student_details(existing_student)
     input("Press Enter to continue...")
+
+
+
+def search_by_name(name):
+    students_found = find_students_by_name(name)
+    if len(students_found) == 0:
+        print(f"No student with Name: {name} was found.")
+        return
+    print("Student found: \n")
+    view(students_found)
 
 
 
@@ -225,8 +264,7 @@ def main():
             view(students)
 
         elif choice == 3:
-            usn = input("Enter the USN to search: ").upper()
-            search(usn)
+            search_menu()
 
         elif choice == 4:
             usn = input("Enter the USN of student to be deleted: ").upper()
